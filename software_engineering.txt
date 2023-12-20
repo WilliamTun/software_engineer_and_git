@@ -1,0 +1,156 @@
+# Source: https://campus.datacamp.com/courses/software-engineering-for-data-scientists-in-python/software-engineering-data-science?ex=4
+
+****************************************
+*********    PACKAGING     *************
+****************************************
+
+# help command shows high level docs for entire package
+help(np)
+
+# help command shows low level documentation for each package method
+help(np.some_function())
+
+
+
+# package structure
+
+- working directory --|
+                      |-- my_script.py
+                      |
+                      |-- package_name --|
+                                         |-- __init__.py
+                                         |-- my_module.py
+
+
+
+
+- working directory --|
+                      |-- my_script.py
+                      |
+                      |-- package_name --|
+                                         |-- subpackage1 --| __init__.py
+                                         |                 |-- my_module.py
+                                         |
+|-- subpackage2 --|
+                                                           | __init__.py
+                                                           | -- my_module2.py
+
+
+# ====== portable packages ======
+
+** setup.py
+** requirements.txt
+ 
+
+- working directory --|
+                      |-- my_script.py
+     |-- **setup.pu
+                      |-- **requirements.txt
+                      |-- package_name --|
+                                         |-- subpackage1 --| __init__.py
+                                         |                 |-- my_module.py
+                                         |
+|-- subpackage2 --|
+                                                           | __init__.py
+                                                           | -- my_module2.py
+
+** requirements.txt
+matplotlib
+numpy==1.15.5
+pycodestyle>=2.4.0
+
+** installing packages
+pip install -r requirements.txt
+
+
+** setup.py
+from setuptools import setup
+setup(
+name="my_package",
+        version="0.0.1",
+description="my package does X",
+        author="Will Tun",
+        author_email="willtun@gmail.com",
+        packages=["my_package"],
+        install_requirements=['matplotlib', 'numpy==1.15.4']
+)
+
+
+
+
+# make package portable:
+cd my_package
+pip install .
+
+
+****************************************
+*********  CODE STYLING  ***************
+****************************************
+
+
+# recommended doc string format
+'''
+<general overview>
+
+Parameters
+----------
+x : description
+y : description
+
+Returns
+-------
+out : description
+
+
+Example usage
+-------------
+'''
+# why is the function laid out in it's way
+# reference: https://stackoverflow.com/a/232322
+
+
+
+
+# ===== use doctest to check if docstrings are good quality
+DOCTEST: https://docs.python.org/3/library/doctest.html
+SPHINX: https://www.sphinx-doc.org/en/master/
+CODECOV: https://about.codecov.io/
+CODE CLIMATE: https://codeclimate.com/
+
+
+
+
+
+
+
+==========================================================
+# ========= PEP8 code style ==============================
+
+PEP:
+https://peps.python.org/pep-0008/
+
+tips:
+- module imports at the top
+- consistant spacing
+- line breaks to separate "ideas & logic units"
+- descriptive naming of functions
+- avoid long name variables
+
+PEP8 Tools:
+- IDE flags violations
+- package: pycodestyle
+- install: pipe install pycodestyle
+- usage: pycodestyle <my_script.py>
+- output interpretation: <file_name>:<line number>:<col num>: <error code> <error description>
+
+
+
+tips:
+Break down complex functions into subfunctions
+eg.
+
+def make_pizza(ingredients):
+    dough = make_dough(ingredients)
+    sauce = make_sauce(ingredients)
+    assembled_piza = assemble_pizza(dough, sauce)
+    return bake(assembled_pizza)
